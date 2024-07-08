@@ -1,0 +1,200 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: 'Butler';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/font/Butler-Light.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Butler';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/font/Butler-Medium.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Butler';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/font/Butler-Bold.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/font/Newsreader16pt-Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/font/Newsreader16pt-Italic.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/font/Poppins-Medium.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/font/Poppins-Bold.woff2) format('woff2');
+}
+
+.main-wrapper {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.left-side {
+  display: none;
+}
+
+.right-side {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.slide {
+  background-color: #000;
+  height: 100vh;
+  left: 0;
+  overflow: hidden;
+  top: 0;
+  z-index: 1;
+}
+
+.slide,
+.slide > div {
+  position: absolute;
+  width: 100%;
+}
+
+.slide > div {
+  animation: slide 25s infinite;
+  background-position: 50%;
+  background-size: cover;
+  height: 100%;
+  opacity: 0;
+}
+
+.slide > div:nth-child(2) {
+  animation-delay: 5s;
+}
+
+.slide > div:nth-child(3) {
+  animation-delay: 10s;
+}
+
+.slide > div:nth-child(4) {
+  animation-delay: 15s;
+}
+
+.slide > div:nth-child(5) {
+  animation-delay: 20s;
+}
+
+@keyframes slide {
+  10% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.1);
+  }
+}
+
+@media screen and (min-width: 1028px) {
+  .right-side {
+    width: 500px;
+    margin: unset;
+  }
+
+  .left-side {
+    display: block;
+    width: calc(100vw - 500px);
+    height: 100%;
+  }
+}
+
+.slick-slide.slick-center img {
+  transform: scale(1.05);
+}
+
+.slick-slide > img {
+  width: 280px;
+  height: 390px;
+}
+
+.slick-slide > div {
+  display: grid;
+  place-items: center;
+  width: 280px;
+  margin: auto;
+}
+
+.box-detail-bride {
+  width: 280px;
+  height: 280px;
+}
+
+.box-story {
+  width: 240px;
+  height: 330px;
+}
+
+.element {
+  position: absolute;
+  top: -36px;
+  left: -180px;
+}
+
+@media screen and (max-width: 400px) {
+  .box-detail-bride {
+    width: 255px;
+    height: 255px;
+  }
+
+  .box-story {
+    width: 220px;
+    height: 300px;
+  }
+
+  .element {
+    top: -60px;
+    left: -145px;
+  }
+}
