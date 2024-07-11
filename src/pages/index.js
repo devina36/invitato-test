@@ -21,4 +21,6 @@ const IndexPage = () => {
 
 export default IndexPage;
 
-export const Head = () => <title>Home Page</title>;
+export const Head = () => (
+  <title>The Wedding of Tiffany & Jared by Invitato</title>
+);
