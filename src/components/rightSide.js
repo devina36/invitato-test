@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Box,
   Flex,
@@ -28,41 +28,14 @@ import {
   imgSincere,
 } from '../utils/data';
 
-const isBrowser = typeof window !== 'undefined';
-
 const RightSide = () => {
-  const [height, setHeight] = useState(null);
-  const [width, setWidth] = useState(null);
   const [isOpen, setIsOpen] = useState(true);
   let sliderRef = useRef(null);
   let slideStoryRef = useRef(null);
   const scrollRef = useRef(null);
 
-  if (isBrowser) {
-    setHeight(window.innerHeight);
-    setWidth(window.innerWidth);
-  }
-
   const executeScroll = () =>
     scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-  const handleWindowResize = () => {
-    setHeight(window.innerHeight);
-  };
-
-  const handleWindowWidthResize = () => {
-    setWidth(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener('resize', handleWindowResize);
-    return () => window.removeEventListener('resize', handleWindowResize);
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener('resize', handleWindowWidthResize);
-    return () => window.removeEventListener('resize', handleWindowWidthResize);
-  }, []);
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -87,7 +60,7 @@ const RightSide = () => {
     className: 'center',
     centerMode: true,
     infinite: true,
-    centerPadding: `${width < 500 ? `${(width - 280) / 2}px` : '103px'}`,
+    centerPadding: '90px',
     slidesToShow: 1,
     speed: 500,
     arrow: false,
@@ -238,7 +211,7 @@ const RightSide = () => {
           </Text>
         </div>
 
-        <div className="slider-container">
+        <div className="slider-container-center">
           <Slider
             ref={(slider) => {
               sliderRef = slider;
@@ -246,7 +219,12 @@ const RightSide = () => {
             {...settings}
           >
             {images.map((item, index) => (
-              <div key={index}>
+              <div
+                key={index}
+                style={{
+                  width: '280px',
+                }}
+              >
                 <img
                   style={{
                     objectFit: 'cover',
@@ -580,41 +558,47 @@ const RightSide = () => {
         >
           Watch our Video
         </Link>
-        <div className="slider-container">
-          <Slider
-            ref={(slider) => {
-              slideStoryRef = slider;
-            }}
-            {...settingStory}
-          >
-            {story.map((item, index) => (
-              <div key={index}>
-                <Heading
-                  mb={'16px'}
-                  fontWeight="bold"
-                  textTransform={'uppercase'}
-                  fontSize="lg"
-                  color={'mainColorText'}
-                  lineHeight="1.33"
-                  textAlign={'center'}
-                >
-                  {item.date}
-                </Heading>
-                <Text color={'mainColorText'} textAlign="center" fontSize="lg">
-                  {item.text}
-                </Text>
-              </div>
-            ))}
-          </Slider>
-          <div style={{ textAlign: 'center', padding: '25px 0' }}>
-            <ButtonPrevNext marginRight="10px" onClick={handlePrevStory}>
-              <MoveLeft color="rgb(26, 27, 29)" />
-            </ButtonPrevNext>
-            <ButtonPrevNext onClick={handleNextStory}>
-              <MoveRight color="rgb(26, 27, 29)" />
-            </ButtonPrevNext>
+        <Box maxWidth={'300px'} margin="auto">
+          <div className="slider-container">
+            <Slider
+              ref={(slider) => {
+                slideStoryRef = slider;
+              }}
+              {...settingStory}
+            >
+              {story.map((item, index) => (
+                <div key={index}>
+                  <Heading
+                    mb={'16px'}
+                    fontWeight="bold"
+                    textTransform={'uppercase'}
+                    fontSize="lg"
+                    color={'mainColorText'}
+                    lineHeight="1.33"
+                    textAlign={'center'}
+                  >
+                    {item.date}
+                  </Heading>
+                  <Text
+                    color={'mainColorText'}
+                    textAlign="center"
+                    fontSize="lg"
+                  >
+                    {item.text}
+                  </Text>
+                </div>
+              ))}
+            </Slider>
+            <div style={{ textAlign: 'center', padding: '25px 0' }}>
+              <ButtonPrevNext marginRight="10px" onClick={handlePrevStory}>
+                <MoveLeft color="rgb(26, 27, 29)" />
+              </ButtonPrevNext>
+              <ButtonPrevNext onClick={handleNextStory}>
+                <MoveRight color="rgb(26, 27, 29)" />
+              </ButtonPrevNext>
+            </div>
           </div>
-        </div>
+        </Box>
       </Stack>
     );
   };
@@ -981,7 +965,7 @@ const RightSide = () => {
   return (
     <Box boxShadow={'2xl'}>
       <Box></Box>
-      <Collapse in={isOpen} animateOpacity style={{ height: height }}>
+      <Collapse in={isOpen} animateOpacity>
         <Box
           minHeight={'100vh'}
           color="alternativeColorText"

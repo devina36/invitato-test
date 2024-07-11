@@ -154,10 +154,10 @@ html {
   transform: scale(1.05);
 }
 
-.slick-slide > img {
+/* .slick-slide > img {
   width: 280px;
   height: 390px;
-}
+} */
 
 .slick-slide > div {
   display: grid;
@@ -180,6 +180,12 @@ html {
   position: absolute;
   top: -36px;
   left: -180px;
+}
+
+@media screen and (max-width: 500px) {
+  .slick-slide > div {
+    width: auto;
+  }
 }
 
 @media screen and (max-width: 400px) {
