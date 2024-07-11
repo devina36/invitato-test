@@ -18,7 +18,14 @@ import ButtonClick from '../components/Button/button-click';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { ChevronDown, MoveLeft, MoveRight } from 'lucide-react';
+import {
+  ChevronDown,
+  MoveLeft,
+  MoveRight,
+  Volume2,
+  VolumeX,
+  Menu,
+} from 'lucide-react';
 import ButtonPrevNext from '../components/Button/button-prevnext';
 import {
   images,
@@ -30,15 +37,39 @@ import {
 
 const RightSide = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [musicOn, setMusicOn] = useState(true);
   let sliderRef = useRef(null);
   let slideStoryRef = useRef(null);
   const scrollRef = useRef(null);
+  const audioRef = useRef(null);
+
+  const playAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
+  };
+
+  const handlePlayPause = () => {
+    if (musicOn) {
+      audioRef.current.pause();
+      setMusicOn(false);
+    } else {
+      audioRef.current.play();
+      setMusicOn(true);
+    }
+  };
 
   const executeScroll = () =>
     scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-  const handleOpen = () => {
-    setIsOpen(!isOpen);
+  const handleOpen = async () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsOpen(!isOpen);
+      playAudio();
+    }, 3000);
   };
 
   const next = () => {
@@ -964,7 +995,51 @@ const RightSide = () => {
 
   return (
     <Box boxShadow={'2xl'}>
-      <Box></Box>
+      <Box>
+        <audio ref={audioRef}>
+          <source
+            src="https://invitato.net/test-product-engineer/static/bg-sound-a2a8927862ee1aa412b3df1a7e46ff7c.mp3"
+            type="audio/mpeg"
+          />
+        </audio>
+        {!isOpen && (
+          <Button
+            position={'fixed'}
+            borderRadius="50%"
+            zIndex="3"
+            bottom={'12px'}
+            left="53px"
+            p="0"
+            bgColor={'rgb(153, 122, 94)'}
+            onClick={handlePlayPause}
+            _hover={{
+              background: 'rgb(153, 122, 94)',
+            }}
+          >
+            {musicOn ? (
+              <Volume2 size={'14'} color="white" />
+            ) : (
+              <VolumeX size={'14'} color="white" />
+            )}
+          </Button>
+        )}
+      </Box>
+      {!isOpen && (
+        <Button
+          position={'fixed'}
+          borderRadius="50%"
+          zIndex="3"
+          bottom={'12px'}
+          left="12px"
+          p="0"
+          bgColor={'rgb(153, 122, 94)'}
+          _hover={{
+            background: 'rgb(153, 122, 94)',
+          }}
+        >
+          <Menu size={'14'} color="white" />
+        </Button>
+      )}
       <Collapse in={isOpen} animateOpacity>
         <Box
           minHeight={'100vh'}
@@ -1023,6 +1098,7 @@ const RightSide = () => {
                   title={'Open'}
                   onClick={handleOpen}
                   className="pushDown"
+                  isLoading={isLoading}
                 />
               </Box>
             </Flex>

@@ -13,7 +13,7 @@ const LeftSide = () => {
       borderRightColor={'blackAlpha.400'}
     >
       <Box height="100%" padding="42px">
-        <div data-aos="fade-up" data-aos-duration="2000">
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
           <Text
             fontFamily="headingAlternative"
             fontSize="md"
@@ -48,7 +48,7 @@ const LeftSide = () => {
             JARED
           </Heading>
         </Box>
-        <div data-aos="fade-up" data-aos-duration="2000">
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
           <Text
             fontWeight="light"
             letterSpacing={'1px'}
