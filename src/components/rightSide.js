@@ -28,13 +28,20 @@ import {
   imgSincere,
 } from '../utils/data';
 
+const isBrowser = typeof window !== 'undefined';
+
 const RightSide = () => {
-  const [height, setHeight] = useState(window.innerHeight);
-  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(null);
+  const [width, setWidth] = useState(null);
   const [isOpen, setIsOpen] = useState(true);
   let sliderRef = useRef(null);
   let slideStoryRef = useRef(null);
   const scrollRef = useRef(null);
+
+  if (isBrowser) {
+    setHeight(window.innerHeight);
+    setWidth(window.innerWidth);
+  }
 
   const executeScroll = () =>
     scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
